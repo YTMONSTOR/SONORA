@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050407">
+  <meta name="description" content="SONORA — a music streaming platform you can see. Original music, synchronized lyrics and real-time 3D.">
+  <title>SONORA</title>
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Unbounded:wght@300;400;500&display=swap">
+  <link rel="stylesheet" href="/css/sonora.css">
+  <!-- If you edit this import map, update its sha256 hash in SecurityConfig (Content-Security-Policy). -->
+  <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script type="module" src="/js/main.js"></script>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g-chrome" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".5" stop-color="#8f88a6"/><stop offset="1" stop-color="#e8e4f4"/></linearGradient>
+      <linearGradient id="g-iris" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c4b5fd"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+    </defs>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10.2-6.4c.6-.4.6-1.3 0-1.7L9.6 4.7C8.9 4.3 8 4.8 8 5.6Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><rect x="6.5" y="5" width="3.8" height="14" rx="1.2" fill="currentColor"/><rect x="13.7" y="5" width="3.8" height="14" rx="1.2" fill="currentColor"/></symbol>
+    <symbol id="i-next" viewBox="0 0 24 24"><path fill="currentColor" d="M5 6.3v11.4c0 .8.9 1.2 1.5.8l8.3-5.7c.6-.4.6-1.2 0-1.6L6.5 5.5C5.9 5.1 5 5.5 5 6.3Z"/><rect x="16.5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-prev" viewBox="0 0 24 24"><path fill="currentColor" d="M19 6.3v11.4c0 .8-.9 1.2-1.5.8l-8.3-5.7c-.6-.4-.6-1.2 0-1.6l8.3-5.7c.6-.4 1.5 0 1.5.8Z"/><rect x="5" y="5" width="2.5" height="14" rx="1" fill="currentColor"/></symbol>
+    <symbol id="i-shuffle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></symbol>
+    <symbol id="i-repeat-one" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/><path d="M11 10h1v4"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 20.3s-7.8-4.6-9.2-9.4C1.8 7.4 4 4.3 7.3 4.3c2 0 3.5 1.1 4.7 2.8 1.2-1.7 2.7-2.8 4.7-2.8 3.3 0 5.5 3.1 4.5 6.6-1.4 4.8-9.2 9.4-9.2 9.4Z"/></symbol>
+    <symbol id="i-queue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h13M3 12h13M3 18h8"/><path d="M17 15v6l4.5-3L17 15Z" fill="currentColor"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+    <symbol id="i-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></symbol>
+    <symbol id="i-mute" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4V5Z" fill="currentColor"/><path d="m16 9 5 6M21 9l-5 6"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1H15v-6.5H9V21H4.5a1 1 0 0 1-1-1v-9.5Z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></symbol>
+    <symbol id="i-library" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="4" height="17" rx="1"/><rect x="9.5" y="3.5" width="4" height="17" rx="1"/><path d="m16.2 4.4 3.8 1 -3.7 15.2-3.7-1"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2.2"/><circle cx="10" cy="17" r="2.2"/></symbol>
+    <symbol id="i-admin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.4 3.4 8 8 9 4.6-1 8-4.6 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4" stroke-linecap="round"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-lyrics" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h10M4 11h16M4 16h7"/><path d="M16 15.5v4a1.5 1.5 0 1 1-1.5-1.5H16"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6.5 8-6.5s8 2.5 8 6.5" stroke-linecap="round"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4h4a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-4M10 16l4-4-4-4M14 12H4"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/></symbol>
+    <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-logo" viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="none" stroke="url(#g-chrome)" stroke-width="1.6"/><circle cx="24" cy="24" r="14.5" fill="none" stroke="url(#g-chrome)" stroke-width=".8" opacity=".55"/><circle cx="24" cy="24" r="8" fill="url(#g-iris)"/><circle cx="24" cy="24" r="1.8" fill="#050407"/><path d="M33.5 10.5a19 19 0 0 1 4 6" stroke="#b6ff4a" stroke-width="1.6" stroke-linecap="round" fill="none"/></symbol>
+  </svg>
+
+  <div class="atmosphere" aria-hidden="true"></div>
+
+  <div class="loader" id="loader" role="status" aria-live="polite">
+    <div class="loader__mark"><div class="loader__disc"></div><div class="loader__word">SONORA</div><span class="sr-only">Loading SONORA</span></div>
+  </div>
+
+  <div class="cursor" id="cursor" aria-hidden="true"><div class="cursor__ring"></div><div class="cursor__dot"></div></div>
+
+  <div class="app">
+    <nav class="rail" id="rail" aria-label="Main">
+      <a class="rail__logo" href="/" aria-label="SONORA home"><svg><use href="#i-logo"/></svg></a>
+      <a class="rail__link" href="/" data-nav="home"><svg><use href="#i-home"/></svg><span>Home</span></a>
+      <a class="rail__link" href="/search" data-nav="search"><svg><use href="#i-search"/></svg><span>Search</span></a>
+      <a class="rail__link" href="/library" data-nav="library"><svg><use href="#i-library"/></svg><span>Library</span></a>
+      <a class="rail__link hidden" href="/admin" data-nav="admin" id="nav-admin"><svg><use href="#i-admin"/></svg><span>Admin</span></a>
+      <div class="rail__spacer"></div>
+      <a class="rail__link" href="/settings" data-nav="settings" id="nav-settings"><svg><use href="#i-settings"/></svg><span>Settings</span></a>
+      <a class="rail__link" href="/login" data-nav="profile" id="nav-profile"><span class="rail__avatar avatar" id="nav-avatar" style="--h:270"><svg style="width:16px;height:16px"><use href="#i-user"/></svg></span><span id="nav-profile-label">Sign in</span></a>
+    </nav>
+
+    <main class="view" id="view" tabindex="-1"></main>
+  </div>
+
+  <!-- persistent player dock -->
+  <section class="dock" id="dock" aria-label="Player">
+    <canvas class="dock__wave" id="dock-wave" aria-hidden="true"></canvas>
+    <div class="dock__now">
+      <div class="dock__art" id="dock-art">
+        <div class="dock__art-inner"><img id="dock-cover" alt="" src="/assets/placeholder.svg"></div>
+        <button class="dock__expand" id="dock-expand" aria-label="Open full-screen player"></button>
+      </div>
+      <div class="dock__meta">
+        <div class="dock__title" id="dock-title">Nothing playing</div>
+        <div class="dock__artist" id="dock-artist">Pick a track to start</div>
+      </div>
+      <button class="icon-btn icon-btn--sm like-btn dock-hide-sm" id="dock-like" aria-label="Save to liked songs" aria-pressed="false"><svg><use href="#i-heart"/></svg></button>
+    </div>
+    <div class="dock__center">
+      <div class="dock__controls">
+        <button class="icon-btn icon-btn--sm dock-hide-sm" id="btn-shuffle" aria-label="Shuffle" aria-pressed="false"><svg><use href="#i-shuffle"/></svg></button>
+        <button class="icon-btn dock-hide-sm" id="btn-prev" aria-label="Previous track"><svg><use href="#i-prev"/></svg></button>
+        <button class="play-orb dock__play" id="btn-play" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+        <button class="icon-btn" id="btn-next" aria-label="Next track"><svg><use href="#i-next"/></svg></button>
+        <button class="icon-btn icon-btn--sm dock-hide-sm" id="btn-repeat" aria-label="Repeat: off"><svg><use href="#i-repeat"/></svg></button>
+      </div>
+      <div class="dock__progress">
+        <span id="t-cur">0:00</span>
+        <input class="range" id="seek" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek">
+        <span id="t-dur">0:00</span>
+      </div>
+    </div>
+    <div class="dock__right">
+      <button class="icon-btn icon-btn--sm" id="btn-lyrics" aria-label="Lyrics"><svg><use href="#i-lyrics"/></svg></button>
+      <button class="icon-btn icon-btn--sm" id="btn-queue" aria-label="Queue" aria-expanded="false" aria-controls="queue"><svg><use href="#i-queue"/></svg></button>
+      <div class="volume">
+        <button class="icon-btn icon-btn--sm" id="btn-mute" aria-label="Mute"><svg><use href="#i-volume"/></svg></button>
+        <input class="range" id="volume" type="range" min="0" max="100" value="80" aria-label="Volume">
+      </div>
+      <button class="icon-btn icon-btn--sm" id="btn-full" aria-label="Full-screen player"><svg><use href="#i-expand"/></svg></button>
+    </div>
+  </section>
+
+  <aside class="drawer" id="queue" aria-label="Queue" aria-hidden="true">
+    <div class="drawer__head"><h2 class="h2">Queue</h2><button class="icon-btn" id="queue-close" aria-label="Close queue"><svg><use href="#i-close"/></svg></button></div>
+    <div class="drawer__body" id="queue-body"></div>
+  </aside>
+
+  <!-- full-screen cinematic player -->
+  <section class="np" id="np" aria-label="Now playing" aria-hidden="true">
+    <div class="np__bg" id="np-bg"></div>
+    <div class="np__stage" id="np-stage"></div>
+    <div class="np__top">
+      <button class="icon-btn" id="np-close" aria-label="Close full-screen player"><svg><use href="#i-down"/></svg></button>
+      <div class="np__source" id="np-source"></div>
+      <button class="icon-btn" id="np-queue" aria-label="Queue"><svg><use href="#i-queue"/></svg></button>
+    </div>
+    <div class="np__layout">
+      <div class="np__left">
+        <canvas class="np__wave" id="np-wave" aria-hidden="true"></canvas>
+        <div>
+          <h2 class="np__title" id="np-title">—</h2>
+          <div class="np__artist" id="np-artist"></div>
+        </div>
+        <div class="np__progress">
+          <span id="np-cur">0:00</span>
+          <input class="range range--live" id="np-seek" type="range" min="0" max="1000" value="0" aria-label="Seek">
+          <span id="np-dur">0:00</span>
+        </div>
+        <div class="np__controls">
+          <button class="icon-btn" id="np-shuffle" aria-label="Shuffle" aria-pressed="false"><svg><use href="#i-shuffle"/></svg></button>
+          <button class="icon-btn" id="np-prev" aria-label="Previous track"><svg><use href="#i-prev"/></svg></button>
+          <button class="play-orb play-orb--lg" id="np-play" aria-label="Play"><svg><use href="#i-play"/></svg></button>
+          <button class="icon-btn" id="np-next" aria-label="Next track"><svg><use href="#i-next"/></svg></button>
+          <button class="icon-btn" id="np-repeat" aria-label="Repeat: off"><svg><use href="#i-repeat"/></svg></button>
+          <button class="icon-btn like-btn" id="np-like" aria-label="Save to liked songs" aria-pressed="false"><svg><use href="#i-heart"/></svg></button>
+          <button class="icon-btn np__lyrics-toggle" id="np-lyrics-toggle" aria-label="Show lyrics" aria-pressed="false"><svg><use href="#i-lyrics"/></svg></button>
+        </div>
+      </div>
+      <div class="np__right"><div class="lyrics" id="np-lyrics" aria-live="off"></div></div>
+    </div>
+  </section>
+
+  <div class="modal-root" id="modal-root"><div class="modal-backdrop" data-close></div></div>
+  <div class="toasts" id="toasts" role="status" aria-live="polite"></div>
+  <audio id="audio" preload="metadata"></audio>
+  <noscript><p style="padding:40px;font-family:sans-serif">SONORA needs JavaScript to play music.</p></noscript>
+</body>
+</html>

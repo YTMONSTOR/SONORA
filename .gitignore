@@ -1,0 +1,5 @@
+target/
+sonora-data/
+.idea/
+*.iml
+config/

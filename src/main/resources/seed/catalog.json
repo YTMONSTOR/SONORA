@@ -1,0 +1,149 @@
+{
+ "artists": [
+  {
+   "slug": "nyx-halcyon",
+   "name": "Nyx Halcyon",
+   "genre": "Nocturnal Synth",
+   "bio": "Nyx Halcyon writes music for cities after midnight: slow-burning synth, warm tape hiss and melodies that feel like streetlights through rain.",
+   "colors": [
+    "#7c3aed",
+    "#1e1b4b",
+    "#a3ff5c"
+   ]
+  },
+  {
+   "slug": "orbital-saints",
+   "name": "Orbital Saints",
+   "genre": "Cathedral Electronica",
+   "bio": "A duo building huge, reverberant electronic hymns out of modular synths and choir samples recorded in empty concrete halls.",
+   "colors": [
+    "#a855f7",
+    "#0f172a",
+    "#22d3ee"
+   ]
+  },
+  {
+   "slug": "lumen-vale",
+   "name": "Lumen Vale",
+   "genre": "Glass Dream Pop",
+   "bio": "Lumen Vale makes shimmering dream pop: glassy arpeggios, airy vocals and a soft focus that makes everything sound like a memory.",
+   "colors": [
+    "#c084fc",
+    "#18181b",
+    "#86efac"
+   ]
+  }
+ ],
+ "albums": [
+  {
+   "slug": "velvet-static",
+   "title": "Velvet Static",
+   "artist": "nyx-halcyon",
+   "year": 2026,
+   "palette": [
+    "#2a0a4a",
+    "#7c3aed",
+    "#a3ff5c"
+   ]
+  },
+  {
+   "slug": "chrome-cathedral",
+   "title": "Chrome Cathedral",
+   "artist": "orbital-saints",
+   "year": 2025,
+   "palette": [
+    "#0b0b1a",
+    "#a855f7",
+    "#22d3ee"
+   ]
+  },
+  {
+   "slug": "glass-hours",
+   "title": "Glass Hours",
+   "artist": "lumen-vale",
+   "year": 2026,
+   "palette": [
+    "#1a1025",
+    "#c084fc",
+    "#86efac"
+   ]
+  },
+  {
+   "slug": "midnight-archive",
+   "title": "Midnight Archive",
+   "artist": "nyx-halcyon",
+   "year": 2024,
+   "palette": [
+    "#05050a",
+    "#6d28d9",
+    "#b6ff3a"
+   ]
+  }
+ ],
+ "tracks": [
+  {
+   "slug": "velvet-static",
+   "title": "Velvet Static",
+   "album": "velvet-static",
+   "no": 1,
+   "duration": 62,
+   "bpm": 96
+  },
+  {
+   "slug": "afterglow-protocol",
+   "title": "Afterglow Protocol",
+   "album": "velvet-static",
+   "no": 2,
+   "duration": 55,
+   "bpm": 110
+  },
+  {
+   "slug": "chrome-cathedral",
+   "title": "Chrome Cathedral",
+   "album": "chrome-cathedral",
+   "no": 1,
+   "duration": 68,
+   "bpm": 88
+  },
+  {
+   "slug": "neon-psalm",
+   "title": "Neon Psalm",
+   "album": "chrome-cathedral",
+   "no": 2,
+   "duration": 50,
+   "bpm": 120
+  },
+  {
+   "slug": "glass-hours",
+   "title": "Glass Hours",
+   "album": "glass-hours",
+   "no": 1,
+   "duration": 60,
+   "bpm": 100
+  },
+  {
+   "slug": "paper-moons",
+   "title": "Paper Moons",
+   "album": "glass-hours",
+   "no": 2,
+   "duration": 71,
+   "bpm": 84
+  },
+  {
+   "slug": "midnight-archive",
+   "title": "Midnight Archive",
+   "album": "midnight-archive",
+   "no": 1,
+   "duration": 65,
+   "bpm": 92
+  },
+  {
+   "slug": "low-orbit",
+   "title": "Low Orbit",
+   "album": "midnight-archive",
+   "no": 2,
+   "duration": 58,
+   "bpm": 104
+  }
+ ]
+}
